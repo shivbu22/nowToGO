@@ -5,6 +5,7 @@ import HighlightsSection from './components/HighlightsSection';
 import PhotoGallerySection from './components/PhotoGallerySection';
 import ItinerarySection from './components/ItinerarySection';
 import TrekDetailsSection from './components/TrekDetailsSection';
+import PricingSection from './components/PricingSection';
 import MysterySection from './components/MysterySection';
 import ContactFormSection from './components/ContactFormSection';
 import Footer from './components/Footer';
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <PhotoGallerySection />
         <ItinerarySection />
         <TrekDetailsSection />
+        <PricingSection />
         <MysterySection />
         <ContactFormSection />
       </main>

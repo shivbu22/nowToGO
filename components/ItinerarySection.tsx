@@ -6,33 +6,39 @@ import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
 const itineraryData = [
   {
+    day: "Day 0",
+    title: "Ghaziabad to Dehradun",
+    desc: "Your journey begins in the evening. Meet the group at Ghaziabad Railway Station. We will board an overnight transport to Dehradun, allowing us to get an early start for the mountains the next morning.",
+    icon: <Bus className="w-6 h-6" />
+  },
+  {
     day: "Day 1",
-    title: "Arrival in Sankri",
-    desc: "Arrive at the base camp, Sankri (1,920m). Briefing, dinner, and overnight stay in a cozy guesthouse.",
-    icon: <MapPin className="w-6 h-6" />
+    title: "Dehradun to Sankri",
+    desc: "Trekkers will be picked up from Dehradun railway station at 7 AM. The journey starts with a scenic drive along the Yamuna river and through beautiful pine forests. By 5 PM, you will reach the charming village of Sankri. After freshening up, you'll have time to explore. Night stay will be arranged in a cozy local homestay.",
+    icon: <Bus className="w-6 h-6" />
   },
   {
     day: "Day 2",
-    title: "Trek to Juda Ka Talab",
-    desc: "Trek 4km through pine forests to the frozen lake of Juda Ka Talab (2,700m). Camping under the stars.",
+    title: "Sankri to Juda Ka Talab",
+    desc: "In the early morning, we begin our mesmerizing 4 km trek to Juda Ka Talab, situated at 9,100 ft. You'll enjoy amazing views as the trail passes through dense forests of maple, deodar, oak, and birch. The night will be spent in tents near the serene lake, offering a chance to connect with nature.",
     icon: <Tent className="w-6 h-6" />
   },
   {
     day: "Day 3",
-    title: "Base Camp Arrival",
-    desc: "Short trek to Kedarkantha Base Camp (3,400m). Acclimatization and snowcraft training. Prepare for summit.",
+    title: "Juda Ka Talab to Kedarkantha Basecamp",
+    desc: "The trek continues towards the Kedarkantha base, nestled at an altitude of 11,250 ft. The trail moves through pine and oak forests before opening up to breathtaking meadows. Get ready to witness splendid views of Himalayan peaks like Swarga Rohini, Kala Nag, and Bandarpoonch. Night stay will be at the base camp.",
     icon: <Mountain className="w-6 h-6" />
   },
   {
     day: "Day 4",
-    title: "The Summit Push",
-    desc: "Start at 3 AM. Climb to the summit (3,800m) for a majestic sunrise. Descend back to Hargaon/Sankri.",
+    title: "Basecamp to Peak to Hargaon",
+    desc: "Today we trek from the base to the Kedarkantha summit at 12,000 ft. After soaking in the panoramic views, we will return to base camp and then descend to the Hargaon campsite. The trail passes through crystal clear streams and oak trees. A delicious and healthy breakfast will be served. At night, we'll stay under an open sky filled with sparkling stars.",
     icon: <Sunrise className="w-6 h-6" />
   },
   {
     day: "Day 5",
-    title: "Departure / Leisure",
-    desc: "Morning tea and breakfast. Check out and departure with a bag full of memories.",
+    title: "Hargaon to Sankri to Dehradun",
+    desc: "On the final day, we trek back from Hargaon to Sankri. After reaching the village, we will drive back to Dehradun, a journey of about 8-9 hours, filled with beautiful and lifelong memories. You will be dropped off at the Dehradun railway station by 11 PM.",
     icon: <Bus className="w-6 h-6" />
   }
 ];
@@ -82,4 +88,3 @@ const ItinerarySection: React.FC = () => {
 };
 
 export default ItinerarySection;
-    

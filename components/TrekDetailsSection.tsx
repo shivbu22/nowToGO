@@ -13,23 +13,39 @@ const tabs = [
 
 const highlightsData = [
   { label: "Altitude", value: "12,500 ft" },
-  { label: "Duration", value: "4 Nights / 5 Days" },
+  { label: "Duration", value: "5 Nights / 6 Days" },
   { label: "Distance", value: "24 km (round trip)" },
   { label: "Difficulty", value: "Easy to Moderate" },
-  { label: "Start/End Point", value: "Dehradun" },
+  { label: "Start/End Point", value: "Ghaziabad / Dehradun" },
   { label: "Best Season", value: "Winter (for snow)" },
 ];
 
 const itineraryTableData = [
-    { day: 1, from: "Dehradun", to: "Sankri", activity: "Drive (210 km / 8-9 hrs)", highlights: "Scenic drive via Mussoorie, along the Tons River. Guesthouse stay." },
-    { day: 2, from: "Sankri", to: "Juda Ka Talab", activity: "Trek (4 km / 4-5 hrs)", highlights: "Walk through pine forests to the frozen high-altitude lake. Campsite stay." },
-    { day: 3, from: "Juda Ka Talab", to: "Base Camp", activity: "Trek (4 km / 3-4 hrs)", highlights: "Gradual ascent with stunning views of Swargarohini & Bandarpoonch peaks. Campsite stay." },
-    { day: 4, from: "Base Camp", to: "Summit & Back", activity: "Trek (10 km / 6-7 hrs)", highlights: "Early morning summit push for sunrise. 360° Himalayan views. Descend to Juda ka Talab. Campsite stay." },
-    { day: 5, from: "Sankri", to: "Dehradun", activity: "Drive (210 km / 8-9 hrs)", highlights: "Journey back to Dehradun, concluding the trek." },
+    { day: 0, from: "Ghaziabad", to: "Dehradun", activity: "Overnight Travel", highlights: "Meet at Ghaziabad station in the evening for departure to Dehradun." },
+    { day: 1, from: "Dehradun", to: "Sankri", activity: "Drive (7 AM - 5 PM)", highlights: "Pickup from railway station. Drive along Yamuna River. Explore Sankri village. Homestay." },
+    { day: 2, from: "Sankri", to: "Juda Ka Talab", activity: "Trek (4 km / 9,100 ft)", highlights: "Trek through dense forests of maple, oak, and birch. Camp stay near the lake." },
+    { day: 3, from: "Juda Ka Talab", to: "Base Camp", activity: "Trek (11,250 ft)", highlights: "Ascend through meadows with views of Swarga Rohini, Kala Nag, and Bandarpoonch peaks." },
+    { day: 4, from: "Base Camp", to: "Hargaon", activity: "Summit Trek (12,000 ft)", highlights: "Summit Kedarkantha peak, witness panoramic views, and descend to Hargaon campsite." },
+    { day: 5, from: "Hargaon", to: "Dehradun", activity: "Trek & Drive", highlights: "Trek down to Sankri, then drive to Dehradun for drop-off by 11 PM." },
 ];
 
-const inclusionsData = [ "Forest Permit & Entrance Fees", "Tent Accommodation (Twin/Triple Sharing)", "Nutritious Meals (Veg & Non-Veg)", "Professional Trek Guide", "Dining & Kitchen Setup", "Medical Kit & Oxygen Cylinder", "Technical Safety Equipment" ];
-const exclusionsData = [ "Personal Insurance & Toiletries", "Medical Certificate", "Breakfast on Day 1 (en route)", "Dinner on Last Day (en route)", "Backpack Offloading (₹300/day optional)" ];
+const inclusionsData = [
+    "Pick and drop services from Dehradun",
+    "1 Night Stay in Sankri (Homestay)",
+    "1 Night Stay in Juda Ka Talab (Camp)",
+    "1 Night Stay in Kedarkantha Base (Camp)",
+    "1 Night Stay in Hargaon (Camp)",
+    "All meals included during the trek",
+    "Local and certified guides"
+];
+const exclusionsData = [
+    "5% GST on drinks, food, tea, and snacks",
+    "Tickets for any sightseeing or extra activity",
+    "Travel insurance and other benefits",
+    "Anything not mentioned in the inclusions",
+    "Heater charge (extra)",
+    "Rental gears"
+];
 
 const packingData = {
   clothing: ["Down Jacket", "Raincoat / Poncho", "Inner Layers & Fleece", "Trekking Pants & T-Shirts", "Extra Socks & Clothes", "Woolen Cap & Gloves", "Neck Warmer"],
