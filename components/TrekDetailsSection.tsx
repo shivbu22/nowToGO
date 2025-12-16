@@ -16,7 +16,7 @@ const highlightsData = [
   { label: "Duration", value: "5 Nights / 6 Days" },
   { label: "Distance", value: "24 km (round trip)" },
   { label: "Difficulty", value: "Easy to Moderate" },
-  { label: "Start/End Point", value: "Ghaziabad / Dehradun" },
+  { label: "Start/End Point", value: "Ghaziabad" },
   { label: "Best Season", value: "Winter (for snow)" },
 ];
 
@@ -26,11 +26,11 @@ const itineraryTableData = [
     { day: 2, from: "Sankri", to: "Juda Ka Talab", activity: "Trek (4 km / 9,100 ft)", highlights: "Trek through dense forests of maple, oak, and birch. Camp stay near the lake." },
     { day: 3, from: "Juda Ka Talab", to: "Base Camp", activity: "Trek (11,250 ft)", highlights: "Ascend through meadows with views of Swarga Rohini, Kala Nag, and Bandarpoonch peaks." },
     { day: 4, from: "Base Camp", to: "Hargaon", activity: "Summit Trek (12,000 ft)", highlights: "Summit Kedarkantha peak, witness panoramic views, and descend to Hargaon campsite." },
-    { day: 5, from: "Hargaon", to: "Dehradun", activity: "Trek & Drive", highlights: "Trek down to Sankri, then drive to Dehradun for drop-off by 11 PM." },
+    { day: 5, from: "Hargaon", to: "Ghaziabad", activity: "Trek & Overnight Drive", highlights: "Trek down to Sankri, then begin overnight journey back to Ghaziabad. Expected arrival next morning." },
 ];
 
 const inclusionsData = [
-    "Pick and drop services from Dehradun",
+    "Round-trip transport from Ghaziabad",
     "1 Night Stay in Sankri (Homestay)",
     "1 Night Stay in Juda Ka Talab (Camp)",
     "1 Night Stay in Kedarkantha Base (Camp)",

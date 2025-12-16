@@ -65,7 +65,7 @@ const HeroSection: React.FC = () => {
 
         <div className="flex flex-wrap gap-4 justify-center text-sm md:text-base font-semibold">
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
-            <Calendar className="w-5 h-5" /> 4 Nights / 5 Days
+            <Calendar className="w-5 h-5" /> 5 Nights / 6 Days
           </div>
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
             <ThermometerSnowflake className="w-5 h-5" /> Snow Trek

@@ -37,8 +37,8 @@ const itineraryData = [
   },
   {
     day: "Day 5",
-    title: "Hargaon to Sankri to Dehradun",
-    desc: "On the final day, we trek back from Hargaon to Sankri. After reaching the village, we will drive back to Dehradun, a journey of about 8-9 hours, filled with beautiful and lifelong memories. You will be dropped off at the Dehradun railway station by 11 PM.",
+    title: "Hargaon to Sankri to Ghaziabad",
+    desc: "On the final day, we trek back from Hargaon to Sankri. After reaching the village, we will begin our overnight journey back to Ghaziabad, filled with beautiful and lifelong memories. You will be dropped off at Ghaziabad the next morning.",
     icon: <Bus className="w-6 h-6" />
   }
 ];

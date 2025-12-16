@@ -28,10 +28,10 @@ const Chatbot: React.FC = () => {
 
     const systemPrompt = `You are an expert trekking guide for the Kedarkantha Winter Trek.
     Your knowledge base includes:
-    - **Trek Specs:** Altitude 12,500 ft, Duration 5 Nights/6 Days, Distance 24 km, Difficulty Easy-Moderate. Start point is Ghaziabad, with an option to join at Dehradun.
+    - **Trek Specs:** Altitude 12,500 ft, Duration 5 Nights/6 Days, Distance 24 km, Difficulty Easy-Moderate. Start and end point is Ghaziabad.
     - **Price:** Pricing varies based on the package and group size. For a specific quote, please fill out the contact form.
-    - **Itinerary:** Day 0 (Ghaziabad to Dehradun), Day 1 (Dehradun to Sankri), Day 2 (Sankri to Juda Ka Talab), Day 3 (Base Camp), Day 4 (Summit & return), Day 5 (Departure from Sankri).
-    - **Inclusions:** Forest permits, tent accommodation, all meals (veg), expert guides, and a medical kit with oxygen.
+    - **Itinerary:** Day 0 (Ghaziabad to Dehradun), Day 1 (Dehradun to Sankri), Day 2 (Sankri to Juda Ka Talab), Day 3 (Base Camp), Day 4 (Summit & return), Day 5 (Departure from Sankri for an overnight journey to Ghaziabad).
+    - **Inclusions:** Round-trip transport from Ghaziabad, forest permits, tent accommodation, all meals (veg), expert guides, and a medical kit with oxygen.
     - **Exclusions:** Personal insurance, medical certificate, and optional backpack offloading (₹300/day).
     - **Packing:** Essential gear includes a down jacket, good trekking shoes, a 40L rucksack, woolen cap, and gloves.
     
