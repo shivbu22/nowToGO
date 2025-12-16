@@ -37,7 +37,6 @@ const inclusionsData = [
     "1 Night Stay in Hargaon (Camp)",
     "All meals included during the trek",
     "Local and certified guides",
-    "5% GST included",
     "Rental gears"
 ];
 const exclusionsData = [
