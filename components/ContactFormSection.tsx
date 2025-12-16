@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { Send, Loader, CheckCircle, AlertTriangle } from 'lucide-react';
 import { styles } from '../App';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import { saveEnquiry } from '../services/supabaseService';
 
 type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -63,14 +64,21 @@ const ContactFormSection: React.FC = () => {
     setStatus('submitting');
     setFeedbackMessage('');
 
-    // This is a mock submission for demonstration.
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Simulate a successful submission
-    setStatus('success');
-    setFeedbackMessage("Thank you! Your enquiry has been sent. We'll be in touch soon.");
-    setFormData({ name: '', phone: '', travelers: '', message: '' });
-    setErrors({});
+    try {
+      await saveEnquiry(formData);
+      
+      // On success:
+      setStatus('success');
+      setFeedbackMessage("Thank you! Your enquiry has been sent. We'll be in touch soon.");
+      setFormData({ name: '', phone: '', travelers: '', message: '' });
+      setErrors({});
+
+    } catch (error) {
+      // On failure:
+      console.error("Submission failed:", error);
+      setStatus('error');
+      setFeedbackMessage("Sorry, something went wrong. Please try again or contact us directly.");
+    }
   };
 
   return (

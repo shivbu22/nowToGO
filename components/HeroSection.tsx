@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Calendar, ThermometerSnowflake, ChevronDown } from 'lucide-react';
 import { styles } from '../App';
@@ -17,32 +18,23 @@ const HeroSection: React.FC = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // The video source URL from your Supabase bucket.
-  // IMPORTANT: You need to create a public bucket named 'trek-videos' in your Supabase project
-  // and upload your video with the name 'kedarkantha-hero-bg.mp4' for this to work.
-  const videoUrl = 'https://lkfnglrbdzdyjeebnnez.supabase.co/storage/v1/object/public/trek-videos/kedarkantha-hero-bg.mp4';
+  // An inspiring image of trekkers watching a sunset, chosen for the hero background.
+  const heroImageUrl = 'https://lkfnglrbdzdyjeebnnez.supabase.co/storage/v1/object/public/trek-images/pexels-sanket-barik-2808574-7846481.jpg';
 
   return (
     <header 
       style={styles.snowGradient} 
       className="text-white min-h-[85vh] flex flex-col items-center justify-center relative overflow-hidden px-4 text-center"
     >
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
-        style={{ 
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-20 mix-blend-overlay"
+        style={{
+          backgroundImage: `url(${heroImageUrl})`,
           transform: `translateY(${offsetY * 0.4}px)`,
           willChange: 'transform'
         }}
-        // The key forces a re-render if the URL were to change, which is good practice.
-        key={videoUrl}
-      >
-        <source src={videoUrl} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+        aria-hidden="true"
+      ></div>
       
       <SnowfallEffect />
 
