@@ -18,23 +18,28 @@ const HeroSection: React.FC = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // An inspiring image of trekkers watching a sunset, chosen for the hero background.
-  const heroImageUrl = 'https://lkfnglrbdzdyjeebnnez.supabase.co/storage/v1/object/public/trek-images/pexels-sanket-barik-2808574-7846481.jpg';
+  const videoUrl = 'https://lkfnglrbdzdyjeebnnez.supabase.co/storage/v1/object/public/trek-videos/kedarkantha-hero-bg.mp4';
 
   return (
     <header 
       style={styles.snowGradient} 
       className="text-white min-h-[85vh] flex flex-col items-center justify-center relative overflow-hidden px-4 text-center"
     >
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-20 mix-blend-overlay"
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
         style={{
-          backgroundImage: `url(${heroImageUrl})`,
           transform: `translateY(${offsetY * 0.4}px)`,
           willChange: 'transform'
         }}
         aria-hidden="true"
-      ></div>
+      >
+        <source src={videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       
       <SnowfallEffect />
 
