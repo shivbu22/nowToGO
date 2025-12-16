@@ -51,7 +51,7 @@ const PricingSection: React.FC = () => {
           >
             <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-xl shadow-md">BEST VALUE</div>
             <div className="text-center mb-6">
-              <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Duplet / Couple</span>
+              <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Standard Package</span>
               <h3 style={styles.headerFont} className="text-4xl font-extrabold text-blue-600 mt-4">₹5,600</h3>
               <p className="text-sm text-slate-500 font-semibold">per person</p>
             </div>
@@ -62,7 +62,7 @@ const PricingSection: React.FC = () => {
               <li className="flex items-center gap-2"><Check className="w-4 h-4 text-green-500" /> All Meals & Permits Included</li>
             </ul>
             <button onClick={handleBookNowClick} className="w-full py-3 bg-blue-600 text-white text-center rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60">
-              Book for Two
+              Book Now
             </button>
           </div>
           

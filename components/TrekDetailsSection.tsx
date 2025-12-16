@@ -36,15 +36,15 @@ const inclusionsData = [
     "1 Night Stay in Kedarkantha Base (Camp)",
     "1 Night Stay in Hargaon (Camp)",
     "All meals included during the trek",
-    "Local and certified guides"
+    "Local and certified guides",
+    "5% GST included",
+    "Rental gears"
 ];
 const exclusionsData = [
-    "5% GST on drinks, food, tea, and snacks",
     "Tickets for any sightseeing or extra activity",
     "Travel insurance and other benefits",
     "Anything not mentioned in the inclusions",
-    "Heater charge (extra)",
-    "Rental gears"
+    "Heater charge (extra)"
 ];
 
 const packingData = {
