@@ -42,8 +42,7 @@ const inclusionsData = [
 const exclusionsData = [
     "Tickets for any sightseeing or extra activity",
     "Travel insurance and other benefits",
-    "Anything not mentioned in the inclusions",
-    "Heater charge (extra)"
+    "Anything not mentioned in the inclusions"
 ];
 
 const packingData = {

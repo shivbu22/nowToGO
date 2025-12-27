@@ -12,53 +12,63 @@ const ContactFormSection: React.FC = () => {
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
 
+  const validateField = (name: string, value: string) => {
+    if (name === 'name') {
+      if (!value.trim()) return "Full name is required.";
+      if (value.trim().length < 2) return "Name must be at least 2 characters.";
+      if (!/^[a-zA-Z\s.'-]+$/.test(value)) return "Please enter a valid name (letters only).";
+    }
+    if (name === 'phone') {
+      if (!value.trim()) return "Phone number is required.";
+      if (!/^[6-9]\d{9}$/.test(value)) return "Enter a valid 10-digit Indian mobile number.";
+    }
+    if (name === 'travelers' && value) {
+      const num = parseInt(value, 10);
+      if (isNaN(num) || num < 1) return "Must be at least 1 traveler.";
+      if (num > 50) return "For large groups, please contact us directly.";
+      if (!Number.isInteger(Number(value))) return "Travelers must be a whole number.";
+    }
+    return "";
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear the specific error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+    
+    // Validate in real-time if the field was already touched
+    if (touched[name]) {
+      const error = validateField(name, value);
+      setErrors(prev => ({ ...prev, [name]: error }));
     }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    const error = validateField(name, value);
+    setErrors(prev => ({ ...prev, [name]: error }));
   };
   
   const validateForm = (): boolean => {
     const newErrors: { [key: string]: string } = {};
-
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = "Full name is required.";
-    } else if (!/^[a-zA-Z\s.'-]+$/.test(formData.name)) {
-      newErrors.name = "Name can only contain letters, spaces, and '.-";
-    }
-
-    // Phone validation (10-digit Indian mobile numbers)
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required.";
-    } else if (!/^[6-9]\d{9}$/.test(formData.phone)) {
-      newErrors.phone = "Please enter a valid 10-digit phone number.";
-    }
-    
-    // Travelers validation (optional, but must be a positive number if entered)
-    if (formData.travelers) {
-        const travelersNum = Number(formData.travelers);
-        if (isNaN(travelersNum) || travelersNum <= 0 || !Number.isInteger(travelersNum)) {
-             newErrors.travelers = "Please enter a valid number (e.g., 1, 2).";
-        }
-    }
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, formData[key as keyof typeof formData]);
+      if (error) newErrors[key] = error;
+    });
 
     setErrors(newErrors);
+    setTouched({ name: true, phone: true, travelers: true, message: true });
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) {
-        return;
-    }
+    if (!validateForm()) return;
     if (status === 'submitting') return;
 
     setStatus('submitting');
@@ -66,19 +76,23 @@ const ContactFormSection: React.FC = () => {
 
     try {
       await saveEnquiry(formData);
-      
-      // On success:
       setStatus('success');
       setFeedbackMessage("Thank you! Your enquiry has been sent. We'll be in touch soon.");
       setFormData({ name: '', phone: '', travelers: '', message: '' });
       setErrors({});
-
+      setTouched({});
     } catch (error) {
-      // On failure:
       console.error("Submission failed:", error);
       setStatus('error');
       setFeedbackMessage("Sorry, something went wrong. Please try again or contact us directly.");
     }
+  };
+
+  const getInputClass = (fieldName: string) => {
+    const hasError = errors[fieldName] && touched[fieldName];
+    return `w-full px-4 py-3 rounded-xl border bg-slate-50 ${
+      hasError ? 'border-red-500 bg-red-50/30' : 'border-slate-200'
+    } focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all`;
   };
 
   return (
@@ -86,32 +100,90 @@ const ContactFormSection: React.FC = () => {
         <div className={`max-w-xl mx-auto transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="text-center mb-10">
             <h2 style={styles.headerFont} className="text-3xl font-bold text-slate-800 mb-2">Have Questions?</h2>
-            <p className="text-slate-500">Fill out the form below and we'll get back to you.</p>
+            <p className="text-slate-500">Fill out the form below and our trek experts will guide you.</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl border border-slate-200 shadow-xl">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl border border-slate-200 shadow-xl" noValidate>
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">Full Name</label>
-              <input type="text" name="name" value={formData.name} onChange={handleInputChange} className={`w-full px-4 py-3 rounded-xl border bg-slate-50 ${errors.name ? 'border-red-500' : 'border-slate-200'} focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all`} placeholder="Enter your name" required aria-invalid={!!errors.name} />
-              {errors.name && <p className="text-red-600 text-xs mt-1 animate-fade-in">{errors.name}</p>}
+              <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="name">Full Name</label>
+              <input 
+                id="name"
+                type="text" 
+                name="name" 
+                value={formData.name} 
+                onChange={handleInputChange} 
+                onBlur={handleBlur}
+                className={getInputClass('name')} 
+                placeholder="John Doe" 
+                required 
+                aria-invalid={!!errors.name} 
+                aria-describedby={errors.name ? "name-error" : undefined}
+              />
+              {errors.name && touched.name && (
+                <p id="name-error" className="text-red-600 text-xs mt-1 animate-fade-in flex items-center gap-1">
+                  <AlertTriangle className="w-3 h-3" /> {errors.name}
+                </p>
+              )}
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">Phone Number</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className={`w-full px-4 py-3 rounded-xl border bg-slate-50 ${errors.phone ? 'border-red-500' : 'border-slate-200'} focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all`} placeholder="10-digit number" required aria-invalid={!!errors.phone} />
-                {errors.phone && <p className="text-red-600 text-xs mt-1 animate-fade-in">{errors.phone}</p>}
+                <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="phone">Phone Number</label>
+                <input 
+                  id="phone"
+                  type="tel" 
+                  name="phone" 
+                  value={formData.phone} 
+                  onChange={handleInputChange} 
+                  onBlur={handleBlur}
+                  className={getInputClass('phone')} 
+                  placeholder="9876543210" 
+                  required 
+                  aria-invalid={!!errors.phone} 
+                  aria-describedby={errors.phone ? "phone-error" : undefined}
+                />
+                {errors.phone && touched.phone && (
+                  <p id="phone-error" className="text-red-600 text-xs mt-1 animate-fade-in flex items-center gap-1">
+                    <AlertTriangle className="w-3 h-3" /> {errors.phone}
+                  </p>
+                )}
               </div>
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2">No. of Travelers</label>
-                <input type="number" name="travelers" value={formData.travelers} onChange={handleInputChange} className={`w-full px-4 py-3 rounded-xl border bg-slate-50 ${errors.travelers ? 'border-red-500' : 'border-slate-200'} focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all`} placeholder="e.g. 2" min="1" aria-invalid={!!errors.travelers} />
-                {errors.travelers && <p className="text-red-600 text-xs mt-1 animate-fade-in">{errors.travelers}</p>}
+                <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="travelers">No. of Travelers</label>
+                <input 
+                  id="travelers"
+                  type="number" 
+                  name="travelers" 
+                  value={formData.travelers} 
+                  onChange={handleInputChange} 
+                  onBlur={handleBlur}
+                  className={getInputClass('travelers')} 
+                  placeholder="e.g. 2" 
+                  min="1" 
+                  aria-invalid={!!errors.travelers} 
+                  aria-describedby={errors.travelers ? "travelers-error" : undefined}
+                />
+                {errors.travelers && touched.travelers && (
+                  <p id="travelers-error" className="text-red-600 text-xs mt-1 animate-fade-in flex items-center gap-1">
+                    <AlertTriangle className="w-3 h-3" /> {errors.travelers}
+                  </p>
+                )}
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">Message (Optional)</label>
-              <textarea name="message" value={formData.message} onChange={handleInputChange} rows={3} className="w-full px-4 py-3 rounded-xl border bg-slate-50 border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="Any specific queries?"></textarea>
+              <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="message">Message (Optional)</label>
+              <textarea 
+                id="message"
+                name="message" 
+                value={formData.message} 
+                onChange={handleInputChange} 
+                rows={3} 
+                maxLength={500}
+                className="w-full px-4 py-3 rounded-xl border bg-slate-50 border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" 
+                placeholder="Any special requests or questions?"
+              ></textarea>
+              <p className="text-right text-[10px] text-slate-400 mt-1">{formData.message.length}/500</p>
             </div>
             
             <div className="pt-2">
