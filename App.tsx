@@ -6,8 +6,6 @@ import PhotoGallerySection from './components/PhotoGallerySection';
 import ItinerarySection from './components/ItinerarySection';
 import TrekDetailsSection from './components/TrekDetailsSection';
 import PricingSection from './components/PricingSection';
-import MysterySection from './components/MysterySection';
-import ContactFormSection from './components/ContactFormSection';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 
@@ -29,8 +27,6 @@ const App: React.FC = () => {
         <ItinerarySection />
         <TrekDetailsSection />
         <PricingSection />
-        <MysterySection />
-        <ContactFormSection />
       </main>
       <Footer />
       <Chatbot />
